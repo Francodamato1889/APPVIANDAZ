@@ -6,6 +6,13 @@ const totalGeneralElem = document.getElementById('total-general');
 
 const SHEET_URL = 'https://opensheet.vercel.app/1-Z2o52z9KlhxB-QC6-49Dw5uYJ8vhf8EESMFVYstXf8/Hoja1';
 
+// URL de MercadoPago (cambiá por tu URL real de pago)
+const MERCADOPAGO_URL = 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=12345-67890'; 
+
+// Datos bancarios
+const CBU = '0000003100000000123456';
+const ALIAS = 'viandaz.banco';
+
 fetch(SHEET_URL)
     .then(response => response.json())
     .then(data => {
@@ -70,7 +77,6 @@ form.addEventListener('submit', (e) => {
     const email = document.getElementById('email').value;
     const telefono = document.getElementById('telefono').value;
 
-    // ✅ ACA capturamos el método de pago seleccionado
     const metodoPagoInput = document.querySelector('input[name="metodo_pago"]:checked');
     const metodo_pago = metodoPagoInput ? metodoPagoInput.value : '';
 
@@ -97,6 +103,14 @@ form.addEventListener('submit', (e) => {
     .then(result => {
         console.log("Pedido enviado:", result);
         alert('¡Pedido enviado!');
+
+        // Ahora manejamos el método de pago
+        if (metodo_pago === 'Transferencia') {
+            mostrarDatosTransferencia();
+        } else if (metodo_pago === 'MercadoPago') {
+            window.location.href = MERCADOPAGO_URL;
+        }
+
         form.reset();
         renderMenus();
         actualizarTotalGeneral();
@@ -106,3 +120,8 @@ form.addEventListener('submit', (e) => {
         console.error('Error:', error);
     });
 });
+
+function mostrarDatosTransferencia() {
+    alert(`Datos para Transferencia Bancaria:\n\nCBU: ${CBU}\nAlias: ${ALIAS}`);
+}
+
