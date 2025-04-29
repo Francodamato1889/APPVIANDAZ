@@ -125,4 +125,25 @@ form.addEventListener('submit', (e) => {
 function mostrarDatosTransferencia() {
     alert(`Datos para Transferencia Bancaria:\n\nCBU: ${CBU}\nAlias: ${ALIAS}`);
 }
+// Función para mostrar el modal con datos
+function mostrarDatosTransferencia() {
+    const modal = document.getElementById('modal-transferencia');
+    modal.style.display = 'block';
+}
+
+// Función para cerrar el modal
+function cerrarModal() {
+    const modal = document.getElementById('modal-transferencia');
+    modal.style.display = 'none';
+}
+
+// Función para copiar el CBU al portapapeles
+function copiarCBU() {
+    const cbuText = document.getElementById('cbu-text').innerText;
+    navigator.clipboard.writeText(cbuText).then(() => {
+        alert('¡CBU copiado al portapapeles!');
+    }).catch(err => {
+        alert('Error al copiar el CBU.');
+    });
+}
 
