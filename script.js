@@ -69,7 +69,15 @@ form.addEventListener('submit', (e) => {
     const direccion = document.getElementById('direccion').value;
     const email = document.getElementById('email').value;
     const telefono = document.getElementById('telefono').value;
-    const metodo_pago = document.querySelector('input[name="metodo_pago"]:checked').value;
+
+    // ✅ ACA capturamos el método de pago seleccionado
+    const metodoPagoInput = document.querySelector('input[name="metodo_pago"]:checked');
+    const metodo_pago = metodoPagoInput ? metodoPagoInput.value : '';
+
+    if (!metodo_pago) {
+        alert('Por favor seleccioná un método de pago.');
+        return;
+    }
 
     const pedido = {
         dia,
