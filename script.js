@@ -12,6 +12,7 @@ const MERCADOPAGO_URL = 'https://www.mercadopago.com.ar/checkout/v1/redirect?pre
 // Datos bancarios
 const CBU = '0000003100000000123456';
 const ALIAS = 'viandaz.banco';
+const AVISO = 'COPIAR Y PEGAR ALIAS O CBU';
 
 fetch(SHEET_URL)
     .then(response => response.json())
