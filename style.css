@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+select {
+    display: block;
+    margin: 10px auto 30px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.menu {
+    background-color: #ffffff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.menu img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px 0;
+}
+
+.cantidad-control {
+    margin-top: 10px;
+}
+
+.cantidad-control button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 18px;
+}
+
+.cantidad-control span {
+    display: inline-block;
+    width: 30px;
+    font-size: 18px;
+}
+
+form {
+    margin-top: 30px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    width: 100%;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}

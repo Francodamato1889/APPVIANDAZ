@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APP VIANDAZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>📅 Seleccionar Día</h1>
+    <select id="dia" name="dia" required>
+        <option value="" disabled selected>Elegí un día</option>
+        <option value="Lunes">Lunes</option>
+        <option value="Martes">Martes</option>
+        <option value="Miércoles">Miércoles</option>
+        <option value="Jueves">Jueves</option>
+        <option value="Viernes">Viernes</option>
+    </select>
+
+    <div id="menus-container"></div>
+
+    <form id="pedido-form">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre y Apellido" required>
+        <input type="text" id="direccion" name="direccion" placeholder="Dirección de Entrega" required>
+        <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
+        <input type="tel" id="telefono" name="telefono" placeholder="Número de Teléfono" required>
+
+        <button type="submit">Enviar Pedido</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
