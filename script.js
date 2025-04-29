@@ -47,7 +47,7 @@ function cambiarCantidad(menuId, cambio) {
     document.getElementById('cantidad-menu' + menuId).innerText = cantidades[menuId];
 
     const precioTotal = cantidades[menuId] * 3800;
-    document.getElementById('precio-menu' + menuId).innerText = $${precioTotal};
+    document.getElementById('precio-menu' + menuId).innerText = `$${precioTotal}`;
 
     actualizarTotalGeneral();
 }
@@ -57,7 +57,7 @@ function actualizarTotalGeneral() {
     for (const id in cantidades) {
         total += cantidades[id] * 3800;
     }
-    totalGeneralElem.innerText = Total General: $${total};
+    totalGeneralElem.innerText = `Total General: $${total}`;
 }
 
 const form = document.getElementById('pedido-form');
@@ -98,3 +98,4 @@ form.addEventListener('submit', (e) => {
         console.error('Error:', error);
     });
 });
+
