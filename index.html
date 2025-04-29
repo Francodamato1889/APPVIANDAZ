@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="logo-container">
-    <img src="https://i.postimg.cc/Y04R3bJM/logo.jpg" alt="Logo Viandaz" class="logo">
-</div>
 
     <h1>📅 Seleccionar Día</h1>
     <select id="dia" name="dia" required>
@@ -22,6 +19,15 @@
     </select>
 
     <div id="menus-container"></div>
+
+    <h2 id="total-general" style="text-align:center; margin-top:30px;">Total General: $0</h2>
+
+    <h2>Método de Pago</h2>
+    <div id="metodo-pago">
+        <label><input type="radio" name="metodo_pago" value="Efectivo" required> Efectivo</label>
+        <label><input type="radio" name="metodo_pago" value="Transferencia" required> Transferencia</label>
+        <label><input type="radio" name="metodo_pago" value="MercadoPago" required> MercadoPago</label>
+    </div>
 
     <form id="pedido-form">
         <input type="text" id="nombre" name="nombre" placeholder="Nombre y Apellido" required>
