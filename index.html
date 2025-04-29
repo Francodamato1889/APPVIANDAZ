@@ -39,7 +39,16 @@
 
         <button type="submit">Enviar Pedido</button>
     </form>
-
+<!-- Modal de transferencia -->
+<div id="modal-transferencia" class="modal">
+  <div class="modal-content">
+    <h2>Datos para Transferencia</h2>
+    <p><strong>CBU:</strong> <span id="cbu-text">0000003100000000123456</span></p>
+    <p><strong>Alias:</strong> <span id="alias-text">viandaz.banco</span></p>
+    <button onclick="copiarCBU()">Copiar CBU</button>
+    <button onclick="cerrarModal()">Cerrar</button>
+  </div>
+</div>
     <script src="script.js"></script>
 </body>
 </html>
