@@ -95,7 +95,7 @@ form.addEventListener('submit', (e) => {
         pedido: JSON.stringify(cantidades)
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbyttDPJiPzCkLDmpDO2a47j6vW4_wAFH9GsAnGe5I5UzNk8bGe1a3xLEuFWzZJ-hkwu/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbz5QC3kqsUgz2b53Q-YbD1o3bJwM2ifnZp-EAAtBU7aOQ1DJfzpIErAWSzovnrYtphJ/exec', {
         method: 'POST',
         body: new URLSearchParams(pedido)
     })
