@@ -108,9 +108,7 @@ form.addEventListener('submit', (e) => {
         // Ahora manejamos el método de pago
         if (metodo_pago === 'Transferencia') {
             mostrarDatosTransferencia();
-        } else if (metodo_pago === 'MercadoPago') {
-            window.location.href = MERCADOPAGO_URL;
-        }
+        } 
 
         form.reset();
         renderMenus();
