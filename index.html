@@ -44,8 +44,21 @@
     <h2>Datos para Transferencia</h2>
     <p><strong>CBU:</strong> <span id="cbu-text">0000003100000000123456</span></p>
     <p><strong>Alias:</strong> <span id="alias-text">viandaz.banco</span></p>
-    <button onclick="copiarCBU()">Copiar CBU</button>
-    <button onclick="cerrarModal()">Cerrar</button>
+
+    <div style="margin-top: 15px;">
+      <button onclick="copiarCBU()">📋 Copiar CBU</button>
+
+      <!-- Botón de WhatsApp -->
+      <a href="https://wa.me/5493415952379?text=Hola!%20Te%20env%C3%ADo%20el%20comprobante%20de%20transferencia%20para%20mi%20pedido%20de%20viandas." 
+         target="_blank" 
+         style="display: inline-block; margin-top: 10px; text-decoration: none;">
+        <button style="background-color: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
+          📤 Enviar comprobante por WhatsApp
+        </button>
+      </a>
+
+      <button onclick="cerrarModal()" style="margin-top: 10px;">Cerrar</button>
+    </div>
   </div>
 </div>
     <script src="script.js"></script>
