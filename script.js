@@ -3,30 +3,46 @@ let cantidades = {};
 
 const menusContainer = document.getElementById('menus-container');
 const totalGeneralElem = document.getElementById('total-general');
+const diaSelect = document.getElementById('dia');
 
 const SHEET_URL = 'https://opensheet.vercel.app/1-Z2o52z9KlhxB-QC6-49Dw5uYJ8vhf8EESMFVYstXf8/Hoja1';
 
-// URL de MercadoPago (cambiá por tu URL real de pago)
-const MERCADOPAGO_URL = 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=12345-67890'; 
-
-// Datos bancarios
 const CBU = '0000003100000000123456';
 const ALIAS = 'viandaz.banco';
-const AVISO = 'COPIAR Y PEGAR ALIAS O CBU';
 
-fetch(SHEET_URL)
-    .then(response => response.json())
-    .then(data => {
-        menus = data;
-        renderMenus();
-    })
-    .catch(error => console.error('Error cargando menús:', error));
+// Detectar día actual y seleccionarlo por defecto
+document.addEventListener('DOMContentLoaded', () => {
+    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const hoy = new Date();
+    const diaActual = diasSemana[hoy.getDay()];
 
-function renderMenus() {
+    if (diaSelect) {
+        diaSelect.value = diaActual;
+    }
+
+    fetch(SHEET_URL)
+        .then(response => response.json())
+        .then(data => {
+            menus = data;
+            renderMenus(diaActual);
+        })
+        .catch(error => console.error('Error cargando menús:', error));
+});
+
+// Cambiar día manualmente
+if (diaSelect) {
+    diaSelect.addEventListener('change', () => {
+        renderMenus(diaSelect.value);
+    });
+}
+
+function renderMenus(diaSeleccionado) {
     menusContainer.innerHTML = '';
     cantidades = {};
 
-    menus.forEach(menu => {
+    const filtrados = menus.filter(menu => menu.dia === diaSeleccionado);
+
+    filtrados.forEach(menu => {
         cantidades[menu.menu_id] = 0;
 
         const menuDiv = document.createElement('div');
@@ -53,10 +69,8 @@ function renderMenus() {
 function cambiarCantidad(menuId, cambio) {
     cantidades[menuId] = Math.max(0, cantidades[menuId] + cambio);
     document.getElementById('cantidad-menu' + menuId).innerText = cantidades[menuId];
-
     const precioTotal = cantidades[menuId] * 3800;
     document.getElementById('precio-menu' + menuId).innerText = `$${precioTotal}`;
-
     actualizarTotalGeneral();
 }
 
@@ -72,7 +86,7 @@ const form = document.getElementById('pedido-form');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const dia = document.getElementById('dia').value;
+    const dia = diaSelect.value;
     const nombre = document.getElementById('nombre').value;
     const direccion = document.getElementById('direccion').value;
     const email = document.getElementById('email').value;
@@ -102,16 +116,14 @@ form.addEventListener('submit', (e) => {
     })
     .then(response => response.text())
     .then(result => {
-        console.log("Pedido enviado:", result);
         alert('¡Pedido enviado!');
 
-        // Ahora manejamos el método de pago
         if (metodo_pago === 'Transferencia') {
             mostrarDatosTransferencia();
-        } 
+        }
 
         form.reset();
-        renderMenus();
+        renderMenus(diaSelect.value);
         actualizarTotalGeneral();
     })
     .catch(error => {
@@ -120,22 +132,17 @@ form.addEventListener('submit', (e) => {
     });
 });
 
-function mostrarDatosTransferencia() {
-    alert(`Datos para Transferencia Bancaria:\n\nCBU: ${CBU}\nAlias: ${ALIAS}`);
-}
-// Función para mostrar el modal con datos
+// Modal de transferencia
 function mostrarDatosTransferencia() {
     const modal = document.getElementById('modal-transferencia');
     modal.style.display = 'block';
 }
 
-// Función para cerrar el modal
 function cerrarModal() {
     const modal = document.getElementById('modal-transferencia');
     modal.style.display = 'none';
 }
 
-// Función para copiar el CBU al portapapeles
 function copiarCBU() {
     const cbuText = document.getElementById('cbu-text').innerText;
     navigator.clipboard.writeText(cbuText).then(() => {
