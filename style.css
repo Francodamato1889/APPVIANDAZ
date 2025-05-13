@@ -10,6 +10,17 @@ h1 {
     margin-bottom: 20px;
 }
 
+.logo-principal {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-principal img {
+    max-width: 200px;
+    height: auto;
+}
+
 select, input, textarea {
     display: block;
     width: 100%;
