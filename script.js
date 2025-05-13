@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const hoy = new Date();
     const diaActual = diasSemana[hoy.getDay()];
 
+// Bloquear días anteriores
+const opciones = diaSelect.options;
+for (let i = 0; i < opciones.length; i++) {
+  const valor = opciones[i].value;
+  if (diasSemana.indexOf(valor) < diasSemana.indexOf(diaActual)) {
+    opciones[i].disabled = true;
+  }
+}
     if (diaSelect) {
         diaSelect.value = diaActual;
     }
