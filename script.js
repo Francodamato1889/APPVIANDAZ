@@ -89,6 +89,9 @@ function actualizarTotalGeneral() {
 const form = document.getElementById('pedido-form');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+    const botonSubmit = form.querySelector('button[type="submit"]');
+botonSubmit.disabled = true;
+botonSubmit.innerText = 'Enviando...';
 
     const dia = diaSelect.value;
     const nombre = document.getElementById('nombre').value;
@@ -130,6 +133,8 @@ form.addEventListener('submit', (e) => {
     })
     .then(response => response.text())
     .then(result => {
+        botonSubmit.disabled = false;
+botonSubmit.innerText = 'Enviar Pedido';
         alert('¡Pedido enviado!');
 
         if (metodo_pago === 'Transferencia') {
