@@ -7,19 +7,14 @@ const totalGeneralElem = document.getElementById('total-general');
 const diaSelect = document.getElementById('dia');
 
 const SHEET_URL = 'https://opensheet.vercel.app/1-Z2o52z9KlhxB-QC6-49Dw5uYJ8vhf8EESMFVYstXf8/Hoja1';
-
 const CBU = '0000003100000000123456';
 const ALIAS = 'viandaz.banco';
 
-// Detectar día actual y seleccionarlo por defecto
 document.addEventListener('DOMContentLoaded', () => {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     const hoy = new Date();
     const diaActual = diasSemana[hoy.getDay()];
-
-    if (diaSelect) {
-        diaSelect.value = diaActual;
-    }
+    if (diaSelect) diaSelect.value = diaActual;
 
     fetch(SHEET_URL)
         .then(response => response.json())
@@ -30,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error cargando menús:', error));
 });
 
-// Cambiar día manualmente
 if (diaSelect) {
     diaSelect.addEventListener('change', () => {
         renderMenus(diaSelect.value);
@@ -40,7 +34,6 @@ if (diaSelect) {
 function renderMenus(diaSeleccionado) {
     menusContainer.innerHTML = '';
     cantidades = {};
-
     menusFiltrados = menus.filter(menu => menu.dia === diaSeleccionado);
 
     menusFiltrados.forEach(menu => {
@@ -95,7 +88,6 @@ form.addEventListener('submit', (e) => {
     const direccion = document.getElementById('direccion').value;
     const email = document.getElementById('email').value;
     const telefono = document.getElementById('telefono').value;
-
     const metodoPagoInput = document.querySelector('input[name="metodo_pago"]:checked');
     const metodo_pago = metodoPagoInput ? metodoPagoInput.value : '';
 
@@ -156,7 +148,6 @@ form.addEventListener('submit', (e) => {
     });
 });
 
-// Modal de transferencia
 function mostrarDatosTransferencia() {
     const modal = document.getElementById('modal-transferencia');
     modal.style.display = 'block';
@@ -177,7 +168,6 @@ function copiarCBU() {
     });
 }
 
-// Modal gracias
 function mostrarModalGracias() {
     const modal = document.getElementById('modal-gracias');
     modal.style.display = 'block';
