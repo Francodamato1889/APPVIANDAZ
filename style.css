@@ -117,13 +117,13 @@ textarea {
 
 /* Logo arriba a la derecha */
 .marca-powered {
-    position: absolute;
-    top: 12px;
-    right: 12px;
+    position: fixed;
+    top: 5px;
+    right: 5px;
     z-index: 1000;
 }
 
 .marca-powered img {
-    height: 22px;
+    height: 16px;
     opacity: 0.9;
 }
