@@ -170,3 +170,12 @@ function copiarCBU() {
         alert('Error al copiar el CBU.');
     });
 }
+function mostrarModalGracias() {
+    const modal = document.getElementById('modal-gracias');
+    modal.style.display = 'block';
+}
+
+function cerrarModalGracias() {
+    const modal = document.getElementById('modal-gracias');
+    modal.style.display = 'none';
+}
