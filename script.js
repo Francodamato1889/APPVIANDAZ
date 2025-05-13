@@ -89,9 +89,6 @@ function actualizarTotalGeneral() {
 const form = document.getElementById('pedido-form');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const botonSubmit = form.querySelector('button[type="submit"]');
-botonSubmit.disabled = true;
-botonSubmit.innerText = 'Enviando...';
 
     const dia = diaSelect.value;
     const nombre = document.getElementById('nombre').value;
@@ -106,6 +103,10 @@ botonSubmit.innerText = 'Enviando...';
         alert('Por favor seleccioná un método de pago.');
         return;
     }
+
+    const botonSubmit = form.querySelector('button[type="submit"]');
+    botonSubmit.disabled = true;
+    botonSubmit.innerText = 'Enviando...';
 
     const menu1 = cantidades[menusFiltrados[0]?.menu_id] || 0;
     const menu2 = cantidades[menusFiltrados[1]?.menu_id] || 0;
@@ -134,16 +135,12 @@ botonSubmit.innerText = 'Enviando...';
     .then(response => response.text())
     .then(result => {
         botonSubmit.disabled = false;
-botonSubmit.innerText = 'Enviar Pedido';
-        if (metodo_pago === 'Transferencia') {
-    mostrarDatosTransferencia();
-} else {
-    mostrarModalGracias();
-}
-        alert('¡Pedido enviado!');
+        botonSubmit.innerText = 'Enviar Pedido';
 
         if (metodo_pago === 'Transferencia') {
             mostrarDatosTransferencia();
+        } else {
+            mostrarModalGracias();
         }
 
         form.reset();
@@ -151,6 +148,8 @@ botonSubmit.innerText = 'Enviar Pedido';
         actualizarTotalGeneral();
     })
     .catch(error => {
+        botonSubmit.disabled = false;
+        botonSubmit.innerText = 'Enviar Pedido';
         alert('Error al enviar el pedido.');
         console.error('Error:', error);
     });
@@ -160,12 +159,12 @@ botonSubmit.innerText = 'Enviar Pedido';
 function mostrarDatosTransferencia() {
     const modal = document.getElementById('modal-transferencia');
     modal.style.display = 'block';
-    setTimeout(mostrarModalGracias, 300); // muestra el segundo modal apenas después
 }
 
 function cerrarModal() {
     const modal = document.getElementById('modal-transferencia');
     modal.style.display = 'none';
+    mostrarModalGracias();
 }
 
 function copiarCBU() {
@@ -176,6 +175,8 @@ function copiarCBU() {
         alert('Error al copiar el CBU.');
     });
 }
+
+// Modal gracias
 function mostrarModalGracias() {
     const modal = document.getElementById('modal-gracias');
     modal.style.display = 'block';
