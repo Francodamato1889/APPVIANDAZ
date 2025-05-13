@@ -136,7 +136,7 @@ form.addEventListener('submit', (e) => {
         nota_menu
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbwKtLBSB0Xhc5Ty_xnS14hm8rW46fhQEXawwbK95RavLyVvPfSytGA8wsvAkIhDWqqg/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxkBI4zN0KZIu-3yuN5e31xPao2MXtczxJBwPiKFv7Q-RGgXB_06qFx9J7Zt-8bFioF/exec', {
         method: 'POST',
         body: new URLSearchParams(pedido)
     })
