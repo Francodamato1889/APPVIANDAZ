@@ -34,7 +34,7 @@
             <p class="subtitulo-pago">¿Cómo vas a pagar?</p>
             <div class="opciones-pago">
                 <label><input type="radio" name="metodo_pago" value="Efectivo"> Efectivo</label>
-                <label><input type="radio" name="metodo_pago" value="Transferencia"> Transferencia</label>
+                <label><input type="radio" name="metodo_pago" value="Transferencia (enviar comprobante por Whatsapp)"> Transferencia</label>
             </div>
         </div>
 
