@@ -124,19 +124,20 @@ form.addEventListener('submit', (e) => {
     const nota_menu = document.getElementById(`nota-menu${menuConNota?.menu_id}`)?.value || '';
 
     const pedido = {
-        dia,
-        nombre,
-        direccion,
-        email,
-        telefono,
-        metodo_pago,
-        menu1,
-        menu2,
-        menu3,
-        nota_menu
-    };
+    dia,
+    nombre,
+    direccion,
+    email,
+    telefono,
+    metodo_pago,
+    menu1,
+    menu2,
+    menu3,
+    nota_menu,
+    clave: 'FRA_Viandaz_2024@secure_key#1'  // 👈 clave oculta
+};
 
-    fetch('https://script.google.com/macros/s/AKfycbxkBI4zN0KZIu-3yuN5e31xPao2MXtczxJBwPiKFv7Q-RGgXB_06qFx9J7Zt-8bFioF/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxJX_PLDqDfFAEXpPX3uhvaRoy7Qs6RsbjDBkGwU1MDa4BV6cS7V991DsJacrUU8SCJ/exec', {
         method: 'POST',
         body: new URLSearchParams(pedido)
     })
