@@ -5,7 +5,7 @@ const menusContainer = document.getElementById('menus-container');
 const totalGeneralElem = document.getElementById('total-general');
 const diaSelect = document.getElementById('dia');
 
-const SHEET_URL = 'https://opensheet.vercel.app/1-Z2o52z9KlhxB-QC6-49Dw5uYJ8vhf8EESMFVYstXf8/Hoja1';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyLTEBvmt9cxlRuWeHAI2MA2N1xyMkh6F3PA9xzSR2n9QzpV986bCB_oygN3b6KWAFa/exec?clave=franco-viandaz-seguro';
 
 const CBU = '0000003100000000123456';
 const ALIAS = 'viandaz.banco';
