@@ -107,7 +107,18 @@ form.addEventListener('submit', (e) => {
         email,
         telefono,
         metodo_pago,
-        pedido: JSON.stringify(cantidades)
+        pedido: JSON.stringify(
+            Object.entries(cantidades)
+                .filter(([_, cantidad]) => cantidad > 0)
+                .map(([id, cantidad]) => {
+                    const menu = menus.find(m => m.menu_id === id);
+                    return {
+                        menu: menu?.nombre || `ID ${id}`,
+                        cantidad
+      };
+    })
+)
+
     };
 
     fetch('https://script.google.com/macros/s/AKfycbz5QC3kqsUgz2b53Q-YbD1o3bJwM2ifnZp-EAAtBU7aOQ1DJfzpIErAWSzovnrYtphJ/exec', {
@@ -151,4 +162,5 @@ function copiarCBU() {
         alert('Error al copiar el CBU.');
     });
 }
+
 
