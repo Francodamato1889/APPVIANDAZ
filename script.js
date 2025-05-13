@@ -61,7 +61,7 @@ function renderMenus(diaSeleccionado) {
             </div>
             <p id="precio-menu${menu.menu_id}" class="precio-menu">$0</p>
             ${menu.nombre.toLowerCase().includes('ensalada') ? `
-              <textarea id="nota-menu${menu.menu_id}" placeholder="Notas para el pedido (opcional)"></textarea>
+              <textarea id="nota-menu${menu.menu_id}" placeholder="Modifica tu ensalada aca!"></textarea>
             ` : ''}
         `;
 
