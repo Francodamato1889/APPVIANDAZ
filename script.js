@@ -5,7 +5,7 @@ const menusContainer = document.getElementById('menus-container');
 const totalGeneralElem = document.getElementById('total-general');
 const diaSelect = document.getElementById('dia');
 
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyLTEBvmt9cxlRuWeHAI2MA2N1xyMkh6F3PA9xzSR2n9QzpV986bCB_oygN3b6KWAFa/exec?clave=franco-viandaz-seguro';
+const SHEET_URL = 'https://opensheet.vercel.app/1-Z2o52z9KlhxB-QC6-49Dw5uYJ8vhf8EESMFVYstXf8/Hoja1';
 
 const CBU = '0000003100000000123456';
 const ALIAS = 'viandaz.banco';
@@ -58,6 +58,9 @@ function renderMenus(diaSeleccionado) {
                 <button type="button" onclick="cambiarCantidad('${menu.menu_id}', 1)">+</button>
             </div>
             <p id="precio-menu${menu.menu_id}" class="precio-menu">$0</p>
+            ${menu.nombre.toLowerCase().includes('ensalada') ? `
+              <textarea id="nota-menu${menu.menu_id}" placeholder="Notas para el pedido (opcional)"></textarea>
+            ` : ''}
         `;
 
         menusContainer.appendChild(menuDiv);
@@ -100,6 +103,14 @@ form.addEventListener('submit', (e) => {
         return;
     }
 
+    const menu1 = cantidades["1"] || 0;
+    const menu2 = cantidades["2"] || 0;
+    const menu3 = cantidades["3"] || 0;
+
+    // Buscar el ID del menú que contiene "ensalada"
+    const menuConNota = menus.find(menu => menu.nombre.toLowerCase().includes('ensalada'));
+    const nota_menu = document.getElementById(`nota-menu${menuConNota?.menu_id}`)?.value || '';
+
     const pedido = {
         dia,
         nombre,
@@ -107,21 +118,13 @@ form.addEventListener('submit', (e) => {
         email,
         telefono,
         metodo_pago,
-        pedido: JSON.stringify(
-            Object.entries(cantidades)
-                .filter(([_, cantidad]) => cantidad > 0)
-                .map(([id, cantidad]) => {
-                    const menu = menus.find(m => m.menu_id === id);
-                    return {
-                        menu: menu?.nombre || `ID ${id}`,
-                        cantidad
-      };
-    })
-)
-
+        menu1,
+        menu2,
+        menu3,
+        nota_menu
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbz5QC3kqsUgz2b53Q-YbD1o3bJwM2ifnZp-EAAtBU7aOQ1DJfzpIErAWSzovnrYtphJ/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbwKtLBSB0Xhc5Ty_xnS14hm8rW46fhQEXawwbK95RavLyVvPfSytGA8wsvAkIhDWqqg/exec', {
         method: 'POST',
         body: new URLSearchParams(pedido)
     })
@@ -162,5 +165,3 @@ function copiarCBU() {
         alert('Error al copiar el CBU.');
     });
 }
-
-
