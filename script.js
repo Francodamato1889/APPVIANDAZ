@@ -135,6 +135,11 @@ botonSubmit.innerText = 'Enviando...';
     .then(result => {
         botonSubmit.disabled = false;
 botonSubmit.innerText = 'Enviar Pedido';
+        if (metodo_pago === 'Transferencia') {
+    mostrarDatosTransferencia();
+} else {
+    mostrarModalGracias();
+}
         alert('¡Pedido enviado!');
 
         if (metodo_pago === 'Transferencia') {
@@ -155,6 +160,7 @@ botonSubmit.innerText = 'Enviar Pedido';
 function mostrarDatosTransferencia() {
     const modal = document.getElementById('modal-transferencia');
     modal.style.display = 'block';
+    setTimeout(mostrarModalGracias, 300); // muestra el segundo modal apenas después
 }
 
 function cerrarModal() {
