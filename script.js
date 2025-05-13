@@ -17,14 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const hoy = new Date();
     const diaActual = diasSemana[hoy.getDay()];
 
-// Bloquear días anteriores
-const opciones = diaSelect.options;
-for (let i = 0; i < opciones.length; i++) {
-  const valor = opciones[i].value;
-  if (diasSemana.indexOf(valor) < diasSemana.indexOf(diaActual)) {
-    opciones[i].disabled = true;
-  }
-}
     if (diaSelect) {
         diaSelect.value = diaActual;
     }
@@ -124,23 +116,22 @@ form.addEventListener('submit', (e) => {
     const nota_menu = document.getElementById(`nota-menu${menuConNota?.menu_id}`)?.value || '';
 
     const pedido = {
-    dia,
-    nombre,
-    direccion,
-    email,
-    telefono,
-    metodo_pago,
-    menu1,
-    menu2,
-    menu3,
-    nota_menu,
-    clave: 'FRA_Viandaz_2024@secure_key#1'  // 👈 esto es obligatorio
-};
+        dia,
+        nombre,
+        direccion,
+        email,
+        telefono,
+        metodo_pago,
+        menu1,
+        menu2,
+        menu3,
+        nota_menu,
+        clave: 'FRA_Viandaz_2024@secure_key#1'
+    };
 
-    fetch('https://script.google.com/macros/s/AKfycbz5-JMD6KwZk1fGQEFAFgKzcxf5jneYdEL--hVzd_1yCoAHJ1ZUp8cTDFMLIgxiWeg/exec', {
-    method: 'POST',
-    body: new URLSearchParams(pedido)
-})
+    fetch('https://script.google.com/macros/s/AKfycbyy2HObu1Jew-uNdaFuJsQEf8-DtNTHGtkZ8oqsND7Us6qqgx9A1DbwCY87W_GmabUr/exec', {
+        method: 'POST',
+        body: new URLSearchParams(pedido)
     })
     .then(response => response.text())
     .then(result => {
