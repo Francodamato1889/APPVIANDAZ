@@ -31,8 +31,11 @@
         <input type="tel" id="telefono" placeholder="Teléfono" required>
 
         <div class="metodo-pago">
-            <label><input type="radio" name="metodo_pago" value="Efectivo"> Efectivo</label>
-            <label><input type="radio" name="metodo_pago" value="Transferencia"> Transferencia</label>
+            <p class="subtitulo-pago">¿Cómo vas a pagar?</p>
+            <div class="opciones-pago">
+                <label><input type="radio" name="metodo_pago" value="Efectivo"> Efectivo</label>
+                <label><input type="radio" name="metodo_pago" value="Transferencia"> Transferencia</label>
+            </div>
         </div>
 
         <button type="submit">Enviar Pedido</button>
