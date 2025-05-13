@@ -134,12 +134,13 @@ form.addEventListener('submit', (e) => {
     menu2,
     menu3,
     nota_menu,
-    clave: 'FRA_Viandaz_2024@secure_key#1'  // 👈 clave oculta
+    clave: 'FRA_Viandaz_2024@secure_key#1'  // 👈 esto es obligatorio
 };
 
-    fetch('https://script.google.com/macros/s/AKfycbxJX_PLDqDfFAEXpPX3uhvaRoy7Qs6RsbjDBkGwU1MDa4BV6cS7V991DsJacrUU8SCJ/exec', {
-        method: 'POST',
-        body: new URLSearchParams(pedido)
+    fetch('https://script.google.com/macros/s/AKfycbz5-JMD6KwZk1fGQEFAFgKzcxf5jneYdEL--hVzd_1yCoAHJ1ZUp8cTDFMLIgxiWeg/exec', {
+    method: 'POST',
+    body: new URLSearchParams(pedido)
+})
     })
     .then(response => response.text())
     .then(result => {
