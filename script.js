@@ -1,5 +1,6 @@
 let menus = [];
 let cantidades = {};
+let menusFiltrados = [];
 
 const menusContainer = document.getElementById('menus-container');
 const totalGeneralElem = document.getElementById('total-general');
@@ -40,9 +41,9 @@ function renderMenus(diaSeleccionado) {
     menusContainer.innerHTML = '';
     cantidades = {};
 
-    const filtrados = menus.filter(menu => menu.dia === diaSeleccionado);
+    menusFiltrados = menus.filter(menu => menu.dia === diaSeleccionado);
 
-    filtrados.forEach(menu => {
+    menusFiltrados.forEach(menu => {
         cantidades[menu.menu_id] = 0;
 
         const menuDiv = document.createElement('div');
@@ -103,12 +104,11 @@ form.addEventListener('submit', (e) => {
         return;
     }
 
-    const menu1 = cantidades["1"] || 0;
-    const menu2 = cantidades["2"] || 0;
-    const menu3 = cantidades["3"] || 0;
+    const menu1 = cantidades[menusFiltrados[0]?.menu_id] || 0;
+    const menu2 = cantidades[menusFiltrados[1]?.menu_id] || 0;
+    const menu3 = cantidades[menusFiltrados[2]?.menu_id] || 0;
 
-    // Buscar el ID del menú que contiene "ensalada"
-    const menuConNota = menus.find(menu => menu.nombre.toLowerCase().includes('ensalada'));
+    const menuConNota = menusFiltrados.find(menu => menu.nombre.toLowerCase().includes('ensalada'));
     const nota_menu = document.getElementById(`nota-menu${menuConNota?.menu_id}`)?.value || '';
 
     const pedido = {
