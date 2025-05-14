@@ -130,7 +130,7 @@ form.addEventListener('submit', (e) => {
         clave: 'FRA_Viandaz_2024@secure_key#1'
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbzoUEDjqGVlrzpkgBU0G55gRRxIJeHWO2HeqAb2UTQHCqijy1mN_0hnhA0uWpn2_OTg/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbwZeEaE0jEO8BBrjUb4gUDx6bWCRpUSedezxhhHxZ7r81j1-5ORGy0j_6PrNOQLSn9r/exec', {
         method: 'POST',
         body: new URLSearchParams(pedido)
     })
