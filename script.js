@@ -82,12 +82,12 @@ const precioTotal = cantidades[menuId] * precioUnitario;
 
 function actualizarTotalGeneral() {
     let total = 0;
-    for (const id in cantidades) {
-        total += cantidades[id] * 3800;
-    }
-    totalGeneralElem.innerText = `Total General: $${total}`;
+for (const id in cantidades) {
+    const menu = menus.find(m => m.menu_id === id);
+    const precio = parseFloat(menu?.precio || 0);
+    total += cantidades[id] * precio;
 }
-
+totalGeneralElem.innerText = `Total General: $${total}`;
 const form = document.getElementById('pedido-form');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
