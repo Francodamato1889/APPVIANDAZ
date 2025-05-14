@@ -10,19 +10,24 @@ const SHEET_URL = 'https://opensheet.vercel.app/1-Z2o52z9KlhxB-QC6-49Dw5uYJ8vhf8
 const CBU = '0000003100000000123456';
 const ALIAS = 'viandaz.banco';
 
+// Detectar día actual, cargar menús y bloquear días anteriores
 document.addEventListener('DOMContentLoaded', () => {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     const hoy = new Date();
     const diaActual = diasSemana[hoy.getDay()];
-    if (diaSelect) diaSelect.value = diaActual;
-    // Bloquear días anteriores
-const opciones = diaSelect.options;
-for (let i = 0; i < opciones.length; i++) {
-    const valor = opciones[i].value;
-    if (diasSemana.indexOf(valor) < diasSemana.indexOf(diaActual)) {
-        opciones[i].disabled = true;
+
+    if (diaSelect) {
+        diaSelect.value = diaActual;
+
+        // Bloquear días anteriores
+        const opciones = diaSelect.options;
+        for (let i = 0; i < opciones.length; i++) {
+            const valor = opciones[i].value;
+            if (diasSemana.indexOf(valor) < diasSemana.indexOf(diaActual)) {
+                opciones[i].disabled = true;
+            }
+        }
     }
-}
 
     fetch(SHEET_URL)
         .then(response => response.json())
@@ -42,6 +47,7 @@ if (diaSelect) {
 function renderMenus(diaSeleccionado) {
     menusContainer.innerHTML = '';
     cantidades = {};
+
     menusFiltrados = menus.filter(menu => menu.dia === diaSeleccionado);
 
     menusFiltrados.forEach(menu => {
@@ -54,14 +60,14 @@ function renderMenus(diaSeleccionado) {
             <h2>${menu.nombre}</h2>
             <img src="${menu.imagen_url}" alt="${menu.nombre}">
             <p>${menu.descripcion}</p>
+            <p class="precio-menu">Precio unitario: $${menu.precio}</p>
             <div class="cantidad-control">
                 <button type="button" onclick="cambiarCantidad('${menu.menu_id}', -1)">-</button>
                 <span id="cantidad-menu${menu.menu_id}">0</span>
                 <button type="button" onclick="cambiarCantidad('${menu.menu_id}', 1)">+</button>
             </div>
-           <p id="precio-menu${menu.menu_id}" class="precio-menu">Precio unitario: $${menu.precio}</p>
             ${menu.nombre.toLowerCase().includes('ensalada') ? `
-              <textarea id="nota-menu${menu.menu_id}" placeholder="Modifica tu ensalada aca!"></textarea>
+              <textarea id="nota-menu${menu.menu_id}" placeholder="Notas para el pedido (opcional)"></textarea>
             ` : ''}
         `;
 
@@ -74,20 +80,19 @@ function renderMenus(diaSeleccionado) {
 function cambiarCantidad(menuId, cambio) {
     cantidades[menuId] = Math.max(0, cantidades[menuId] + cambio);
     document.getElementById('cantidad-menu' + menuId).innerText = cantidades[menuId];
-    const precioUnitario = parseFloat(menus.find(m => m.menu_id === menuId)?.precio || 0);
-const precioTotal = cantidades[menuId] * precioUnitario;
-    document.getElementById('precio-menu' + menuId).innerText = `$${precioTotal}`;
     actualizarTotalGeneral();
 }
 
 function actualizarTotalGeneral() {
     let total = 0;
-for (const id in cantidades) {
-    const menu = menus.find(m => m.menu_id === id);
-    const precio = parseFloat(menu?.precio || 0);
-    total += cantidades[id] * precio;
+    for (const id in cantidades) {
+        const menu = menus.find(m => m.menu_id === id);
+        const precio = parseFloat(menu?.precio || 0);
+        total += cantidades[id] * precio;
+    }
+    totalGeneralElem.innerText = `Total General: $${total}`;
 }
-totalGeneralElem.innerText = `Total General: $${total}`;
+
 const form = document.getElementById('pedido-form');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -130,7 +135,7 @@ form.addEventListener('submit', (e) => {
         clave: 'FRA_Viandaz_2024@secure_key#1'
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbwZeEaE0jEO8BBrjUb4gUDx6bWCRpUSedezxhhHxZ7r81j1-5ORGy0j_6PrNOQLSn9r/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbwKtLBSB0Xhc5Ty_xnS14hm8rW46fhQEXawwbK95RavLyVvPfSytGA8wsvAkIhDWqqg/exec', {
         method: 'POST',
         body: new URLSearchParams(pedido)
     })
