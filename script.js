@@ -59,7 +59,7 @@ function renderMenus(diaSeleccionado) {
                 <span id="cantidad-menu${menu.menu_id}">0</span>
                 <button type="button" onclick="cambiarCantidad('${menu.menu_id}', 1)">+</button>
             </div>
-            <p id="precio-menu${menu.menu_id}" class="precio-menu">$0</p>
+           <p id="precio-menu${menu.menu_id}" class="precio-menu">Precio unitario: $${menu.precio}</p>
             ${menu.nombre.toLowerCase().includes('ensalada') ? `
               <textarea id="nota-menu${menu.menu_id}" placeholder="Modifica tu ensalada aca!"></textarea>
             ` : ''}
