@@ -74,7 +74,8 @@ function renderMenus(diaSeleccionado) {
 function cambiarCantidad(menuId, cambio) {
     cantidades[menuId] = Math.max(0, cantidades[menuId] + cambio);
     document.getElementById('cantidad-menu' + menuId).innerText = cantidades[menuId];
-    const precioTotal = cantidades[menuId] * 3800;
+    const precioUnitario = parseFloat(menus.find(m => m.menu_id === menuId)?.precio || 0);
+const precioTotal = cantidades[menuId] * precioUnitario;
     document.getElementById('precio-menu' + menuId).innerText = `$${precioTotal}`;
     actualizarTotalGeneral();
 }
