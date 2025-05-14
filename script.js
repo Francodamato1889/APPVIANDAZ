@@ -121,6 +121,14 @@ form.addEventListener('submit', (e) => {
     const menuConNota = menusFiltrados.find(menu => menu.nombre.toLowerCase().includes('ensalada'));
     const nota_menu = document.getElementById(`nota-menu${menuConNota?.menu_id}`)?.value || '';
 
+    // Calcular total
+    let total = 0;
+    for (const id in cantidades) {
+        const menu = menus.find(m => m.menu_id === id);
+        const precio = parseFloat(menu?.precio || 0);
+        total += cantidades[id] * precio;
+    }
+
     const pedido = {
         dia,
         nombre,
@@ -132,10 +140,11 @@ form.addEventListener('submit', (e) => {
         menu2,
         menu3,
         nota_menu,
-        clave: 'FRA_Viandaz_2024@secure_key#1'
+        clave: 'FRA_Viandaz_2024@secure_key#1',
+        total
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbwKtLBSB0Xhc5Ty_xnS14hm8rW46fhQEXawwbK95RavLyVvPfSytGA8wsvAkIhDWqqg/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxpG02lTj0B5pwiv2wad_jXqLWVK61LYkYXrerROoHJgu47xpeNNHwVnCa4CFmtBDye/exec', {
         method: 'POST',
         body: new URLSearchParams(pedido)
     })
