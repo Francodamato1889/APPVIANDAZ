@@ -139,3 +139,11 @@ textarea {
     height: 16px;
     opacity: 0.9;
 }
+.zona-envios {
+    color: #d32f2f; /* rojo suave */
+    font-size: 12px;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    text-align: left;
+    opacity: 0.9;
+}
