@@ -149,19 +149,24 @@ form.addEventListener('submit', (e) => {
     })
     .then(response => response.text())
     .then(result => {
-        botonSubmit.disabled = false;
-        botonSubmit.innerText = 'Enviar Pedido';
+    botonSubmit.disabled = false;
+    botonSubmit.innerText = 'Enviar Pedido';
 
-        if (metodo_pago === 'Transferencia') {
-            mostrarDatosTransferencia();
-        } else {
-            mostrarModalGracias();
-        }
+    if (result.trim() === 'PEDIDOS CERRADOS') {
+        alert('Los pedidos para hoy ya están cerrados. Podés pedir para otro día.');
+        return; // No sigue con el resto
+    }
 
-        form.reset();
-        renderMenus(diaSelect.value);
-        actualizarTotalGeneral();
-    })
+    if (metodo_pago === 'Transferencia') {
+        mostrarDatosTransferencia();
+    } else {
+        mostrarModalGracias();
+    }
+
+    form.reset();
+    renderMenus(diaSelect.value);
+    actualizarTotalGeneral();
+})
     .catch(error => {
         botonSubmit.disabled = false;
         botonSubmit.innerText = 'Enviar Pedido';
