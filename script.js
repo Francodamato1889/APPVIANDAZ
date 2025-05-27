@@ -100,7 +100,7 @@ form.addEventListener('submit', (e) => {
     const dia = diaSelect.value;
     const nombre = document.getElementById('nombre').value;
     const direccion = document.getElementById('direccion').value;
-    const email = document.getElementById('email').value;
+    // const email = document.getElementById('email').value;
     const telefono = document.getElementById('telefono').value;
     const metodoPagoInput = document.querySelector('input[name="metodo_pago"]:checked');
     const metodo_pago = metodoPagoInput ? metodoPagoInput.value : '';
@@ -133,7 +133,6 @@ form.addEventListener('submit', (e) => {
         dia,
         nombre,
         direccion,
-        email,
         telefono,
         metodo_pago,
         menu1,
