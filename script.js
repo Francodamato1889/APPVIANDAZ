@@ -154,19 +154,31 @@ form.addEventListener('submit', (e) => {
 
     if (result === 'PEDIDOS CERRADOS') {
         alert('Los pedidos para hoy ya están cerrados. Podés pedir para otro día.');
-        return;
-    }
-
-    if (metodo_pago === 'Transferencia') {
-        mostrarDatosTransferencia();
     } else {
-        mostrarModalGracias();
+        if (metodo_pago === 'Transferencia') {
+            mostrarDatosTransferencia();
+        } else {
+            mostrarModalGracias();
+        }
+
+        form.reset();
     }
 
-    form.reset();
+    // Estas funciones deben ejecutarse siempre
     renderMenus(diaSelect.value);
     actualizarTotalGeneral();
 })
+.catch(error => {
+    console.error('Error al enviar el pedido:', error);
+    alert('Hubo un error al enviar el pedido. Intentá nuevamente.');
+    botonSubmit.disabled = false;
+    botonSubmit.innerText = 'Enviar Pedido';
+
+    // También restablecer pantalla
+    renderMenus(diaSelect.value);
+    actualizarTotalGeneral();
+});
+
 .catch(error => {
     console.error('Error al enviar el pedido:', error);
     alert('Hubo un error al enviar el pedido. Intentá nuevamente.');
