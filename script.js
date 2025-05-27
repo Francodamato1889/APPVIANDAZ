@@ -143,7 +143,7 @@ form.addEventListener('submit', (e) => {
         total
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbyKCtXngmQJ4lj9vZn2Z4mqc8FHnU143aCuuLfvS4fNRXIbSOXhZ9nqf-vJgklIljtM/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxz0-oqsfdRKea1AGk1bnsukFEgJDuwtjXLxpVbj1bVzkl3tQkHIaegyg9mwA_Ol7y9/exec', {
         method: 'POST',
         body: new URLSearchParams(pedido)
     })
