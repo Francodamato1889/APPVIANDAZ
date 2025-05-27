@@ -45,16 +45,28 @@
         <button type="submit">Enviar Pedido</button>
     </form>
 
-    <!-- Modal transferencia -->
-    <div id="modal-transferencia" class="modal">
-        <div class="modal-content">
-            <h2>Datos para Transferencia</h2>
-            <p><strong>CBU:</strong> <span id="cbu-text">0000003100000000123456</span></p>
-            <p><strong>Alias:</strong> <span id="alias-text">viandaz.banco</span></p>
-            <button onclick="copiarCBU()">Copiar CBU</button>
-            <button onclick="cerrarModal()">Cerrar</button>
-        </div>
+  <!-- Modal transferencia -->
+<div id="modal-transferencia" class="modal">
+    <div class="modal-content">
+        <h2>Datos para Transferencia</h2>
+        <p><strong>CBU:</strong> <span id="cbu-text">0000003100000000123456</span></p>
+        <p><strong>Alias:</strong> <span id="alias-text">viandaz.banco</span></p>
+
+        <p style="color: #d32f2f; font-size: 14px; font-weight: bold; margin-top: 15px;">
+            Acordate de pasarnos el comprobante 📸
+        </p>
+
+        <a href="https://wa.me/5493416642152?text=Hola%2C+te+adjunto+el+comprobante+de+la+transferencia" 
+           target="_blank" 
+           style="display: inline-block; margin-top: 10px; background-color: #25d366; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 15px;">
+            Enviar comprobante por WhatsApp
+        </a>
+
+        <br><br>
+        <button onclick="copiarCBU()">Copiar CBU</button>
+        <button onclick="cerrarModal()">Cerrar</button>
     </div>
+</div>
 
     <!-- Modal gracias -->
     <div id="modal-gracias" class="modal">
