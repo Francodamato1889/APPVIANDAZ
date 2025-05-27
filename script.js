@@ -152,9 +152,11 @@ form.addEventListener('submit', (e) => {
     botonSubmit.disabled = false;
     botonSubmit.innerText = 'Enviar Pedido';
 
-    if (result.trim() === 'PEDIDOS CERRADOS') {
+    console.log("Respuesta del servidor:", result); // Debug
+
+    if (result.includes('cerró')) {
         alert('Los pedidos para hoy ya están cerrados. Podés pedir para otro día.');
-        return; // No sigue con el resto
+        return;
     }
 
     if (metodo_pago === 'Transferencia') {
