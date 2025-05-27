@@ -143,7 +143,7 @@ form.addEventListener('submit', (e) => {
         total
     };
 
-   fetch('https://script.google.com/macros/s/AKfycbxz0-oqsfdRKea1AGk1bnsukFEgJDuwtjXLxpVbj1bVzkl3tQkHIaegyg9mwA_Ol7y9/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxz0-oqsfdRKea1AGk1bnsukFEgJDuwtjXLxpVbj1bVzkl3tQkHIaegyg9mwA_Ol7y9/exec', {
         method: 'POST',
         body: new URLSearchParams(pedido)
     })
@@ -162,7 +162,13 @@ form.addEventListener('submit', (e) => {
         renderMenus(diaSelect.value);
         actualizarTotalGeneral();
     })
-
+    .catch(error => {
+        botonSubmit.disabled = false;
+        botonSubmit.innerText = 'Enviar Pedido';
+        alert('Error al enviar el pedido.');
+        console.error('Error:', error);
+    });
+});
 
 function mostrarDatosTransferencia() {
     const modal = document.getElementById('modal-transferencia');
