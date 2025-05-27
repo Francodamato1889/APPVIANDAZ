@@ -143,7 +143,7 @@ form.addEventListener('submit', (e) => {
         total
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbxz0-oqsfdRKea1AGk1bnsukFEgJDuwtjXLxpVbj1bVzkl3tQkHIaegyg9mwA_Ol7y9/exec', {
+   fetch('https://script.google.com/macros/s/AKfycbxz0-oqsfdRKea1AGk1bnsukFEgJDuwtjXLxpVbj1bVzkl3tQkHIaegyg9mwA_Ol7y9/exec', {
     method: 'POST',
     body: new URLSearchParams(pedido)
 })
@@ -152,13 +152,11 @@ form.addEventListener('submit', (e) => {
     botonSubmit.disabled = false;
     botonSubmit.innerText = 'Enviar Pedido';
 
-    // 🔴 Chequeamos si el servidor respondió que se cerraron los pedidos
-    if (result.includes('cerró')) {
-        alert(result); // muestra: "El horario para pedir viandas para hoy ya cerró (11:30 hs)."
-        return; // ⚠️ Detenemos acá
+    if (result === 'PEDIDOS CERRADOS') {
+        alert('Los pedidos para hoy ya están cerrados. Podés pedir para otro día.');
+        return;
     }
 
-    // ✅ Si no se bloqueó, seguimos como siempre
     if (metodo_pago === 'Transferencia') {
         mostrarDatosTransferencia();
     } else {
@@ -169,6 +167,12 @@ form.addEventListener('submit', (e) => {
     renderMenus(diaSelect.value);
     actualizarTotalGeneral();
 })
+.catch(error => {
+    console.error('Error al enviar el pedido:', error);
+    alert('Hubo un error al enviar el pedido. Intentá nuevamente.');
+    botonSubmit.disabled = false;
+    botonSubmit.innerText = 'Enviar Pedido';
+});
 .catch(error => {
     alert('Error al enviar el pedido: ' + error.message);
 });
