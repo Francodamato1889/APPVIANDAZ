@@ -144,17 +144,14 @@ form.addEventListener('submit', (e) => {
     };
 
    fetch('https://script.google.com/macros/s/AKfycbxz0-oqsfdRKea1AGk1bnsukFEgJDuwtjXLxpVbj1bVzkl3tQkHIaegyg9mwA_Ol7y9/exec', {
-    method: 'POST',
-    body: new URLSearchParams(pedido)
-})
-.then(response => response.text())
-.then(result => {
-    botonSubmit.disabled = false;
-    botonSubmit.innerText = 'Enviar Pedido';
+        method: 'POST',
+        body: new URLSearchParams(pedido)
+    })
+    .then(response => response.text())
+    .then(result => {
+        botonSubmit.disabled = false;
+        botonSubmit.innerText = 'Enviar Pedido';
 
-    if (result.trim() === 'PEDIDOS CERRADOS') {
-        alert('Los pedidos para hoy ya están cerrados. Podés pedir para otro día.');
-    } else {
         if (metodo_pago === 'Transferencia') {
             mostrarDatosTransferencia();
         } else {
@@ -162,44 +159,10 @@ form.addEventListener('submit', (e) => {
         }
 
         form.reset();
-    }
-
-    // Siempre ejecutar esto al final
-    if (diaSelect && diaSelect.value) {
         renderMenus(diaSelect.value);
-    }
-    actualizarTotalGeneral();
-})
-.catch(error => {
-    console.error('Error al enviar el pedido:', error);
-    alert('Hubo un error al enviar el pedido. Intentá nuevamente.');
+        actualizarTotalGeneral();
+    })
 
-    botonSubmit.disabled = false;
-    botonSubmit.innerText = 'Enviar Pedido';
-
-    if (diaSelect && diaSelect.value) {
-        renderMenus(diaSelect.value);
-    }
-    actualizarTotalGeneral();
-});
-
-.catch(error => {
-    console.error('Error al enviar el pedido:', error);
-    alert('Hubo un error al enviar el pedido. Intentá nuevamente.');
-    botonSubmit.disabled = false;
-    botonSubmit.innerText = 'Enviar Pedido';
-});
-.catch(error => {
-    alert('Error al enviar el pedido: ' + error.message);
-});
-
-    .catch(error => {
-        botonSubmit.disabled = false;
-        botonSubmit.innerText = 'Enviar Pedido';
-        alert('Error al enviar el pedido.');
-        console.error('Error:', error);
-    });
-});
 
 function mostrarDatosTransferencia() {
     const modal = document.getElementById('modal-transferencia');
