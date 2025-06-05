@@ -66,13 +66,18 @@ function renderMenus(diaSeleccionado) {
                 <span id="cantidad-menu${menu.menu_id}">0</span>
                 <button type="button" onclick="cambiarCantidad('${menu.menu_id}', 1)">+</button>
             </div>
-            ${menu.nombre.toLowerCase().includes('ensalada') ? `
-              <textarea id="nota-menu${menu.menu_id}" placeholder="Notas para el pedido (opcional)"></textarea>
-            ` : ''}
         `;
 
         menusContainer.appendChild(menuDiv);
     });
+
+    // Campo de nota general (al final de todos los menús)
+    const notaDiv = document.createElement('div');
+    notaDiv.innerHTML = `
+        <label for="nota-general"><strong>Notas para el pedido (opcional):</strong></label><br>
+        <textarea id="nota-general" placeholder="Ej: Sin cebolla, entregar antes de las 13hs..." rows="3" style="width:100%; margin-top:8px;"></textarea>
+    `;
+    menusContainer.appendChild(notaDiv);
 
     actualizarTotalGeneral();
 }
@@ -100,7 +105,6 @@ form.addEventListener('submit', (e) => {
     const dia = diaSelect.value;
     const nombre = document.getElementById('nombre').value;
     const direccion = document.getElementById('direccion').value;
-    // const email = document.getElementById('email').value;
     const telefono = document.getElementById('telefono').value;
     const metodoPagoInput = document.querySelector('input[name="metodo_pago"]:checked');
     const metodo_pago = metodoPagoInput ? metodoPagoInput.value : '';
@@ -118,8 +122,8 @@ form.addEventListener('submit', (e) => {
     const menu2 = cantidades[menusFiltrados[1]?.menu_id] || 0;
     const menu3 = cantidades[menusFiltrados[2]?.menu_id] || 0;
 
-    const menuConNota = menusFiltrados.find(menu => menu.nombre.toLowerCase().includes('ensalada'));
-    const nota_menu = document.getElementById(`nota-menu${menuConNota?.menu_id}`)?.value || '';
+    // Nota general
+    const nota_menu = document.getElementById('nota-general')?.value || '';
 
     // Calcular total
     let total = 0;
@@ -149,26 +153,26 @@ form.addEventListener('submit', (e) => {
     })
     .then(response => response.text())
     .then(result => {
-    botonSubmit.disabled = false;
-    botonSubmit.innerText = 'Enviar Pedido';
+        botonSubmit.disabled = false;
+        botonSubmit.innerText = 'Enviar Pedido';
 
-    console.log("Respuesta del servidor:", result); // Debug
+        console.log("Respuesta del servidor:", result);
 
-    if (result.includes('cerró')) {
-        alert('Los pedidos para hoy ya están cerrados. Podés pedir para otro día.');
-        return;
-    }
+        if (result.includes('cerró')) {
+            alert('Los pedidos para hoy ya están cerrados. Podés pedir para otro día.');
+            return;
+        }
 
-    if (metodo_pago === 'Transferencia') {
-        mostrarDatosTransferencia();
-    } else {
-        mostrarModalGracias();
-    }
+        if (metodo_pago === 'Transferencia') {
+            mostrarDatosTransferencia();
+        } else {
+            mostrarModalGracias();
+        }
 
-    form.reset();
-    renderMenus(diaSelect.value);
-    actualizarTotalGeneral();
-})
+        form.reset();
+        renderMenus(diaSelect.value);
+        actualizarTotalGeneral();
+    })
     .catch(error => {
         botonSubmit.disabled = false;
         botonSubmit.innerText = 'Enviar Pedido';
@@ -206,3 +210,4 @@ function cerrarModalGracias() {
     const modal = document.getElementById('modal-gracias');
     modal.style.display = 'none';
 }
+
