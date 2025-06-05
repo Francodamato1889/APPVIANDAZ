@@ -6,9 +6,9 @@ const menusContainer = document.getElementById('menus-container');
 const totalGeneralElem = document.getElementById('total-general');
 const diaSelect = document.getElementById('dia');
 
-const SHEET_URL = 'https://opensheet.vercel.app/1-Z2o52z9KlhxB-QC6-49Dw5uYJ8vhf8EESMFVYstXf8/Hoja1';
-const CBU = '0000003100000000123456';
-const ALIAS = 'viandaz.banco';
+const SHEET_URL = 'https://opensheet.vercel.app/1uwkEv32liiVWZ-zhf9YOTJQK6DtaMpKkybqaf5Q66HY/Hoja1';
+const CBU = '3300000620000325756024';
+const ALIAS = 'carlosalbertoschmidt';
 
 // Detectar día actual, cargar menús y bloquear días anteriores
 document.addEventListener('DOMContentLoaded', () => {
